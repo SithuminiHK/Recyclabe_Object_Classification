@@ -18,7 +18,7 @@ valid_generator = valid_datagen.flow_from_directory(
     valid_dir, target_size=(256, 256), batch_size=32, class_mode='binary'
 )
 
-# Create the model
+#create the model
 detection_model = create_object_detection_model(input_shape=(256, 256, 3))
 detection_model.compile(
     optimizer='adam',
@@ -26,11 +26,11 @@ detection_model.compile(
     metrics={'bounding_box': 'mse', 'class': 'accuracy'}
 )
 
-# Callbacks
+#callbacks
 checkpoint = ModelCheckpoint('best_model.h5', save_best_only=True, monitor='val_loss', mode='min')
 early_stop = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
-# Training
+#training
 history = detection_model.fit(
     train_generator,
     validation_data=valid_generator,
