@@ -9,11 +9,23 @@ We used the "Recyclable and Household Waste Classification" dataset from Kaggle,
 Link : https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification
 
 **Folder Structure:**
+
 data/processed_realtime_dataset/: Preprocessed dataset ready for model training and evaluation.
+
 data/README.md: Includes the dataset description and download link.
+
 src/: Contains Python scripts for various stages of the project:
+  
   preprocessing.py: preprocessing raw data for training and testing.
+  
   Realtime_model.py : defines model architecture for real time object detection
+
+  test.py : test the model with sample images before traininf
+
+  test_realtime.py : test the model with real time input
+  
   Realtime_model_train.py: handles the training pipeline.
+ 
   evaluate_realtime.py: Evaluates model performance.
+
 Results/: Contains training results, graphs, and logs.
