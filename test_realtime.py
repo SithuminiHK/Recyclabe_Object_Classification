@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
-from model import create_feature_extractor
+from Realtime_model import create_feature_extractor
 from Realtime_model import draw_detections
 
-# Load the trained model
+#load the trained model
 detection_model = load_model('best_model.h5', custom_objects={"create_feature_extractor": create_feature_extractor})
 
-# Start video capture (0 for the default webcam)
+#start video capture
 cap = cv2.VideoCapture(0)
 
 def preprocess_image(image_array, target_size=(256, 256)):
@@ -15,47 +15,47 @@ def preprocess_image(image_array, target_size=(256, 256)):
     if not isinstance(image_array, np.ndarray):
         raise ValueError("Input must be a NumPy array.")
 
-    # Resize the image
+    #resize the image
     img = cv2.resize(image_array, target_size)
-    img = img / 255.0  # Normalize pixel values to [0, 1]
-    img = np.expand_dims(img, axis=0)  # Add batch dimension
+    img = img / 255.0  #normalize pixel values to [0, 1]
+    img = np.expand_dims(img, axis=0)
     return img
 
 while True:
-    # Capture frame-by-frame
+    #capture frame-by-frame
     ret, frame = cap.read()
 
     if not ret:
         print("Failed to grab frame.")
         break
 
-    # Preprocess the frame
+    #preprocess the frame
     preprocessed_image = preprocess_image(frame, target_size=(256, 256))
 
-    # Get predictions from the model
+    #get predictions from the model
     bounding_boxes, class_scores = detection_model.predict(preprocessed_image)
 
-    # Rescale bounding boxes to the original frame size
+    #rescale bounding boxes to the original frame size
     h, w, _ = frame.shape
     bounding_boxes = bounding_boxes[0] * [w, h, w, h]
     bounding_boxes = bounding_boxes.astype(int)
 
-    # Ensure bounding_boxes is 2D
+    #ensure bounding_boxes is 2D
     bounding_boxes = bounding_boxes.reshape(-1, 4)
 
-    # Labels based on class scores
+    #labels based on class scores
     labels = ["Recyclable" if score > 0.5 else "Non-Recyclable" for score in class_scores[0]]
 
-    # Draw bounding boxes and labels on the frame
+    #draw bounding boxes and labels on the frame
     output_frame = draw_detections(frame, bounding_boxes, labels, class_scores[0])
 
-    # Display the resulting frame
+    #display the resulting frame
     cv2.imshow("Real-Time Detection", output_frame)
 
-    # Press 'q' to exit the video feed
+    #press 'q' to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release the capture object and close all OpenCV windows
+#release the capture object and close all OpenCV windows
 cap.release()
 cv2.destroyAllWindows()
