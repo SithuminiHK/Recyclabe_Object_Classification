@@ -10,22 +10,22 @@ Link : https://www.kaggle.com/datasets/alistairking/recyclable-and-household-was
 
 **Folder Structure:**
 
--data/processed_realtime_dataset/: Preprocessed dataset ready for model training and evaluation.
+- data/processed_realtime_dataset/: Preprocessed dataset ready for model training and evaluation.
 
--data/README.md: Includes the dataset description and download link.
+- data/README.md: Includes the dataset description and download link.
 
--Python scripts for various stages of the project:
+- Python scripts for various stages of the project:
   
-  -preprocessing.py: preprocessing raw data for training and testing.
+  - preprocessing.py: preprocessing raw data for training and testing.
   
-  -Realtime_model.py : defines model architecture for real time object detection
+  - Realtime_model.py : defines model architecture for real time object detection
 
-  -test.py : test the model with sample images before training the model
+  - test.py : test the model with sample images before training the model
 
-  -test_realtime.py : test the model with real time input training the model
+  - test_realtime.py : test the model with real time input training the model
   
-  -Realtime_model_train.py: handles the training pipeline.
+  - Realtime_model_train.py: handles the training pipeline.
  
-  -evaluate_realtime.py: Evaluates model performance.
+  - evaluate_realtime.py: Evaluates model performance.
 
--Results/: Contains training results, graphs, and logs.
+- Results/: Contains training results, graphs, and logs.
