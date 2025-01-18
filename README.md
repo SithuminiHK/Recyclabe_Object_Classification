@@ -14,7 +14,7 @@ Link : https://www.kaggle.com/datasets/alistairking/recyclable-and-household-was
 
 -data/README.md: Includes the dataset description and download link.
 
--src/: Contains Python scripts for various stages of the project:
+-Python scripts for various stages of the project:
   
   -preprocessing.py: preprocessing raw data for training and testing.
   
